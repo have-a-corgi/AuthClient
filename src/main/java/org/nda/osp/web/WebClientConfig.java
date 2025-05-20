@@ -9,6 +9,6 @@ public class WebClientConfig {
 
     @Bean
     public WebClient webClient() {
-        return WebClient.create("http://127.0.0.1:8081/");
+        return WebClient.builder().baseUrl("http://127.0.0.1:8081/").build();
     }
 }
