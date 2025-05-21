@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import static org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient;
+
 @RequiredArgsConstructor
 @RestController
 public class Acceptor {
@@ -23,6 +25,18 @@ public class Acceptor {
         OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
         String[] block = webClient.get().uri("/messages")
                 .headers(h->h.setBearerAuth(accessToken.getTokenValue()))
+                .retrieve().bodyToMono(String[].class).block();
+        return ResponseEntity.ok(block);
+    }
+
+    @GetMapping("/hello2")
+    public ResponseEntity<Object> hello2(
+            @RegisteredOAuth2AuthorizedClient("messaging-client")
+            OAuth2AuthorizedClient authorizedClient
+    ) {
+        OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
+        String[] block = webClient.get().uri("/messages")
+                .attributes(oauth2AuthorizedClient(authorizedClient))
                 .retrieve().bodyToMono(String[].class).block();
         return ResponseEntity.ok(block);
     }
