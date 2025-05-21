@@ -8,7 +8,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WebClientConfig {
 
     @Bean
-    public WebClient webClient() {
-        return WebClient.builder().baseUrl("http://127.0.0.1:8081/").build();
+    public WebClient webClient(OAuth2AuthorizedClientManager authorizedClientManager) {
+        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2Client =
+                new ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
+        return WebClient.builder()
+                .baseUrl("http://127.0.0.1:8081/")
+                .apply(oauth2Client.oauth2Configuration())
+                .build();
     }
+    
 }
