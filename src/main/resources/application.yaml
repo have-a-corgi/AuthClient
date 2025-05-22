@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: msg
+          uri: http://127.0.0.1:8081
+          predicates:
+          - Path=/messages/**
+          filters:
+          - TokenRelay=
