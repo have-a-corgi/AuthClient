@@ -38,7 +38,7 @@ public class TokenWebFilter implements GlobalFilter {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .body(BodyInserters.fromValue(
                                 "grant_type="+c.getAuthorizationGrantType().getValue()
-                                        +"&scope=openid read"))
+                                        +"&scope="+String.join(" ", c.getScopes())))
                         .retrieve().bodyToMono(TokenDto.class)
         );
 
