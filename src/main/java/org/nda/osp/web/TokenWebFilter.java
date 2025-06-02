@@ -32,7 +32,7 @@ public class TokenWebFilter implements GlobalFilter {
     private Mono<TokenDto> token() {
         Mono<ClientRegistration> gateway = repository.findByRegistrationId("gateway");
         return gateway.flatMap(c ->
-                tokenWebClient.post().uri("/oauth2/token")
+                tokenWebClient.post().uri(c.getProviderDetails().getTokenUri())
                         .header("Authorization", "Basic " +
                                 Base64.getEncoder().encodeToString((c.getClientId()+":"+c.getClientSecret()).getBytes()))
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)

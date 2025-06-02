@@ -9,7 +9,7 @@ public class WebClientConfig {
 
     @Bean("tokenWebClient")
     public WebClient webClient() {
-        return WebClient.create("http://127.0.0.1:9000");
+        return WebClient.create();
     }
     
 }
