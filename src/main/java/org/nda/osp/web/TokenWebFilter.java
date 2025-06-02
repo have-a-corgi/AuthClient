@@ -36,7 +36,9 @@ public class TokenWebFilter implements GlobalFilter {
                         .header("Authorization", "Basic " +
                                 Base64.getEncoder().encodeToString((c.getClientId()+":"+c.getClientSecret()).getBytes()))
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .body(BodyInserters.fromValue("grant_type=client_credentials&scope=openid read"))
+                        .body(BodyInserters.fromValue(
+                                "grant_type="+c.getAuthorizationGrantType().getValue()
+                                        +"&scope=openid read"))
                         .retrieve().bodyToMono(TokenDto.class)
         );
 
