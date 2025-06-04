@@ -7,12 +7,16 @@ spring:
           predicates:
           - Path=/messages/**
           filters:
-          - name: TokenRelay
+          - name: MyOwnTokenRelay
             args:
               name: messaging-client
 
 logging:
   level:
+    org:
+      nda:
+        osp:
+          web: TRACE
     org.springframework:
       cloud.gateway: DEBUG
       http.server.reactive: DEBUG
