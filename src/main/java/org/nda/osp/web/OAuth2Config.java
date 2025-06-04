@@ -13,8 +13,8 @@ public class OAuth2Config {
 
     @Bean
     public ReactiveClientRegistrationRepository clientRegistrationRepository() {
-        ClientRegistration user = ClientRegistration.withRegistrationId("gateway")
-                .clientId("gateway")
+        ClientRegistration user = ClientRegistration.withRegistrationId("messaging-client")
+                .clientId("messaging-client")
                 .clientSecret("secret")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)

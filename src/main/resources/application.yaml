@@ -1,26 +1,20 @@
 spring:
   cloud:
     gateway:
-      default-filters:
-        - TokenRelay=
       routes:
         - id: msg
           uri: http://127.0.0.1:8081
           predicates:
           - Path=/messages/**
-#security:
-    #  oauth2:
-      #client:
-        #registration:
-          #gateway:
-          #provider: uaa
-          #client-id: gateway
-          #client-secret: secret
-          #authorization-grant-type: client_credentials
-          #token_uri: http://127.0.0.1:9000/oauth2/token
-          #redirect-uri: http://127.0.0.1:8080/login/oauth2/code/oidc-client
-          #scope: openid,read
-        #provider:
-          #uaa:
-          #authorization-uri: http://localhost:8090/uaa/oauth/authorize
-          #token-uri: http://uaa:8090/uaa/oauth/token
+          filters:
+          - name: TokenRelay
+            args:
+              name: messaging-client
+
+logging:
+  level:
+    org.springframework:
+      cloud.gateway: DEBUG
+      http.server.reactive: DEBUG
+      web.reactive: DEBUG
+      security: DEBUG
