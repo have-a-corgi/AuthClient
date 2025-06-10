@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.client.web.server.ServerOAuth2Authori
 @Configuration
 public class ManagerConfig {
 
-    @Bean
+    //@Bean
     public ReactiveOAuth2AuthorizedClientManager reactiveOAuth2AuthorizedClientManager(
             ReactiveClientRegistrationRepository clientRegistrationRepository,
             ServerOAuth2AuthorizedClientRepository authorizedClientRepository
