@@ -9,7 +9,7 @@ spring:
           predicates:
           - Path=/messages/**
           filters:
-          - name: MyOwnTokenRelay
+          - name: TokenRelay
             args:
               name: messaging-client
 
