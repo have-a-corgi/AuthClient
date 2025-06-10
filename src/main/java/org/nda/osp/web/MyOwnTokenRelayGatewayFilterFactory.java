@@ -70,6 +70,7 @@ public class MyOwnTokenRelayGatewayFilterFactory extends AbstractGatewayFilterFa
 
     private Mono<OAuth2AuthorizedClient> authorizedClient(OAuth2AuthorizeRequest request) {
         ReactiveOAuth2AuthorizedClientManager clientManager = (ReactiveOAuth2AuthorizedClientManager) this.clientManagerProvider.getIfAvailable();
+        log.trace("Client manager: {}", clientManager);
         return clientManager == null ? Mono.error(new IllegalStateException("No ReactiveOAuth2AuthorizedClientManager bean was found. Did you include the org.springframework.boot:spring-boot-starter-oauth2-client dependency?")) : clientManager.authorize(request);
     }
 
